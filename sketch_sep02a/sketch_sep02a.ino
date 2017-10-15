@@ -81,7 +81,64 @@ void processSlackMessage(char *payload) {
       leadPos = 0;
       rgb = CRGB(128, 0, 128);
     }
+    if(nextWord[0] == '#') {
+      checkHexCode(nextWord);
+    }
   }
+}
+
+void checkHexCode(char* msgWord) {
+  byte complete = 0;
+  byte red, green, blue;
+
+  for(int i = 1; i < 7; i++) {
+    // Break on end of string
+    if(msgWord[i] == '\0') {
+      break;
+    }
+
+    // Break if not a valid hex digit
+    if(msgWord[i] < '0' || (msgWord[i] > '9' && msgWord[i] < 'a') || msgWord[i] > 'f') {
+      break;
+    }
+
+    switch (i) {
+      case 1:
+        red = getVal(msgWord[i]) * 16;
+        break;
+      case 2:
+        red += getVal(msgWord[i]);
+        break;
+      case 3:
+        green = getVal(msgWord[i]) * 16;
+        break;
+      case 4:
+        green += getVal(msgWord[i]);
+        break;
+      case 5:
+        blue = getVal(msgWord[i]) * 16;
+        break;
+      case 6:
+        blue += getVal(msgWord[i]);
+        complete = 1;
+        break;
+    }
+  }
+
+  if(!complete) {
+    return;
+  }
+
+  leadPos = 0;
+  rgb = CRGB(red, green, blue);
+}
+
+byte getVal(char c)
+{
+   if(c >= '0' && c <= '9')
+     return (byte)(c - '0');
+   else
+     return (byte)(c-'a'+10);
 }
 
 void sendPing() {
