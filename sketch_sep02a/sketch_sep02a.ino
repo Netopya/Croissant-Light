@@ -15,7 +15,7 @@ FASTLED_USING_NAMESPACE
 #define WIFI_PASSWORD "#"
 
 // if Slack changes their SSL fingerprint, you would need to update this:
-#define SLACK_SSL_FINGERPRINT "AC 95 5A 58 B8 4E 0B CD B3 97 D2 88 68 F5 CA C1 0A 81 E3 6E" 
+#define SLACK_SSL_FINGERPRINT "C1 0D 53 49 D2 3E E5 2B A2 61 D5 9E 6F 99 0D 3D FD 8B B2 B3" 
 
 #define WORD_SEPERATORS "., \"'()[]<>;:-+&?!\n\t"
 
